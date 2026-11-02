@@ -1,0 +1,734 @@
+<meta charset="utf-8">
+<style>
+  :where(#new-sis-mid-fi) {
+    color-scheme: light dark;
+    --nsis-bg: light-dark(#f5f7fa, #101215);
+    --nsis-panel: light-dark(#ffffff, #1a1d21);
+    --nsis-panel-muted: light-dark(#f2f4f7, #23282e);
+    --nsis-line: light-dark(#dfe3e8, #31373d);
+    --nsis-text: light-dark(#172026, #e8eaec);
+    --nsis-muted: light-dark(#60707d, #a2adb8);
+    --nsis-primary: light-dark(#1677ff, #4fd1c5);
+    --nsis-primary-soft: light-dark(#e6f4ff, #173734);
+    --nsis-accent: light-dark(#0d9488, #34d399);
+    --nsis-warn: light-dark(#faad14, #f6c66a);
+    --nsis-danger: light-dark(#ff4d4f, #ff7a6f);
+    --nsis-success: light-dark(#52c41a, #74d9ab);
+    --nsis-shadow: 0 8px 24px rgba(15, 23, 42, .08);
+  }
+
+  :where(#new-sis-mid-fi) * { box-sizing: border-box; }
+
+  #new-sis-mid-fi {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    min-height: 720px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--nsis-bg);
+    color: var(--nsis-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    box-shadow: var(--nsis-shadow);
+  }
+
+  #new-sis-mid-fi aside {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 22px 18px;
+    background: var(--nsis-panel);
+    border-right: 1px solid var(--nsis-line);
+  }
+
+  #new-sis-mid-fi .nsis-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  #new-sis-mid-fi .nsis-sub {
+    margin: 0;
+    color: var(--nsis-muted);
+    font-size: 12px;
+  }
+
+  #new-sis-mid-fi nav {
+    display: grid;
+    gap: 6px;
+  }
+
+  #new-sis-mid-fi button {
+    font: inherit;
+  }
+
+  #new-sis-mid-fi .nsis-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--nsis-text);
+    text-align: left;
+    cursor: pointer;
+    transition: background-color .15s ease, color .15s ease;
+  }
+
+  #new-sis-mid-fi .nsis-menu-item:hover,
+  #new-sis-mid-fi .nsis-menu-item:focus-visible {
+    background: var(--nsis-panel-muted);
+  }
+
+  #new-sis-mid-fi .nsis-menu-item[aria-selected="true"] {
+    background: var(--nsis-primary-soft);
+    color: var(--nsis-primary);
+  }
+
+  #new-sis-mid-fi .nsis-menu-item i { width: 18px; height: 18px; }
+
+  #new-sis-mid-fi .nsis-help {
+    padding: 14px;
+    border-radius: 8px;
+    background: var(--nsis-panel-muted);
+  }
+
+  #new-sis-mid-fi .nsis-help-title {
+    font-weight: 600;
+  }
+
+  #new-sis-mid-fi .nsis-help-text {
+    margin: 6px 0 12px;
+    color: var(--nsis-muted);
+  }
+
+  #new-sis-mid-fi .nsis-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border: 1px solid var(--nsis-line);
+    border-radius: 6px;
+    background: var(--nsis-panel);
+    color: var(--nsis-text);
+    cursor: pointer;
+  }
+
+  #new-sis-mid-fi .nsis-btn-primary {
+    background: var(--nsis-primary);
+    color: #fff;
+    border-color: transparent;
+  }
+
+  #new-sis-mid-fi .nsis-btn-ghost {
+    background: transparent;
+  }
+
+  #new-sis-mid-fi .nsis-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+  }
+
+  #new-sis-mid-fi .nsis-avatar {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--nsis-primary-soft);
+    color: var(--nsis-primary);
+    font-weight: 600;
+  }
+
+  #new-sis-mid-fi main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+    overflow: auto;
+  }
+
+  #new-sis-mid-fi .nsis-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  #new-sis-mid-fi h1 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  #new-sis-mid-fi .nsis-eyebrow {
+    color: var(--nsis-muted);
+    font-size: 12px;
+  }
+
+  #new-sis-mid-fi .nsis-icon-btn {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--nsis-line);
+    border-radius: 8px;
+    background: var(--nsis-panel);
+    color: var(--nsis-text);
+    cursor: pointer;
+  }
+
+  #new-sis-mid-fi section[role="tabpanel"] {
+    display: none;
+  }
+
+  #new-sis-mid-fi section[role="tabpanel"]:not([hidden]) {
+    display: grid;
+    gap: 18px;
+  }
+
+  #new-sis-mid-fi .nsis-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  #new-sis-mid-fi .nsis-grid-2 {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  #new-sis-mid-fi .nsis-panel {
+    padding: 16px;
+    border: 1px solid var(--nsis-line);
+    border-radius: 8px;
+    background: var(--nsis-panel);
+  }
+
+  #new-sis-mid-fi h2 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  #new-sis-mid-fi h3 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  #new-sis-mid-fi p {
+    margin: 0;
+  }
+
+  #new-sis-mid-fi .nsis-muted {
+    color: var(--nsis-muted);
+  }
+
+  #new-sis-mid-fi .nsis-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    background: var(--nsis-panel-muted);
+    color: var(--nsis-muted);
+  }
+
+  #new-sis-mid-fi .nsis-pill-ok { background: rgba(82, 196, 26, .12); color: var(--nsis-success); }
+  #new-sis-mid-fi .nsis-pill-warn { background: rgba(250, 173, 20, .14); color: var(--nsis-warn); }
+  #new-sis-mid-fi .nsis-pill-danger { background: rgba(255, 77, 79, .12); color: var(--nsis-danger); }
+
+  #new-sis-mid-fi .nsis-course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  #new-sis-mid-fi .nsis-course-card {
+    padding: 14px;
+    border: 1px solid var(--nsis-line);
+    border-radius: 8px;
+    background: var(--nsis-panel);
+  }
+
+  #new-sis-mid-fi .nsis-course-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  #new-sis-mid-fi .nsis-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  #new-sis-mid-fi .nsis-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--nsis-line);
+    border-radius: 8px;
+    background: var(--nsis-panel);
+  }
+
+  #new-sis-mid-fi input {
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: var(--nsis-text);
+    font: inherit;
+  }
+
+  #new-sis-mid-fi .nsis-list {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #new-sis-mid-fi .nsis-list-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    background: var(--nsis-panel-muted);
+  }
+
+  #new-sis-mid-fi .nsis-week {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  #new-sis-mid-fi .nsis-week-col {
+    display: grid;
+    gap: 6px;
+    padding: 8px;
+    border-radius: 6px;
+    background: var(--nsis-panel-muted);
+  }
+
+  #new-sis-mid-fi .nsis-week-item {
+    padding: 6px;
+    border-radius: 4px;
+    background: var(--nsis-primary-soft);
+    color: var(--nsis-primary);
+    font-size: 12px;
+    text-align: center;
+  }
+
+  #new-sis-mid-fi .nsis-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: var(--nsis-panel-muted);
+  }
+
+  #new-sis-mid-fi .nsis-process {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  #new-sis-mid-fi .nsis-process-step {
+    padding: 12px;
+    border-radius: 8px;
+    background: var(--nsis-panel-muted);
+    text-align: center;
+  }
+
+  #new-sis-mid-fi .nsis-process-step.is-active {
+    background: var(--nsis-primary-soft);
+    color: var(--nsis-primary);
+  }
+
+  #new-sis-mid-fi .nsis-progress {
+    display: grid;
+    gap: 12px;
+  }
+
+  #new-sis-mid-fi .nsis-progress-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 60px;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #new-sis-mid-fi .nsis-bar {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--nsis-panel-muted);
+    overflow: hidden;
+  }
+
+  #new-sis-mid-fi .nsis-bar-fill {
+    height: 100%;
+    background: var(--nsis-primary);
+  }
+
+  #new-sis-mid-fi .nsis-guide-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  #new-sis-mid-fi .nsis-guide-num {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--nsis-primary-soft);
+    color: var(--nsis-primary);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 860px) {
+    #new-sis-mid-fi {
+      grid-template-columns: 1fr;
+    }
+    #new-sis-mid-fi aside {
+      border-right: 0;
+      border-bottom: 1px solid var(--nsis-line);
+    }
+    #new-sis-mid-fi main {
+      padding: 18px;
+    }
+    #new-sis-mid-fi .nsis-grid-3,
+    #new-sis-mid-fi .nsis-grid-2 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    #new-sis-mid-fi .nsis-week {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    #new-sis-mid-fi .nsis-process {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
+
+<div id="new-sis-mid-fi" class="nsis-root">
+  <aside aria-label="学生信息系统侧栏">
+    <div>
+      <div class="nsis-logo"><i data-lucide="graduation-cap" aria-hidden="true"></i><span>New SIS</span></div>
+      <p class="nsis-sub">学生信息系统</p>
+    </div>
+    <nav role="tablist" aria-label="主导航">
+      <button id="tab-overview" class="nsis-menu-item" type="button" role="tab" aria-controls="view-overview" aria-selected="true" data-view="overview"><i data-lucide="home" aria-hidden="true"></i><span>首页概览</span></button>
+      <button id="tab-explore" class="nsis-menu-item" type="button" role="tab" aria-controls="view-explore" aria-selected="false" data-view="explore"><i data-lucide="search" aria-hidden="true"></i><span>探索课程</span></button>
+      <button id="tab-plan" class="nsis-menu-item" type="button" role="tab" aria-controls="view-plan" aria-selected="false" data-view="plan"><i data-lucide="layout-grid" aria-hidden="true"></i><span>我的选课计划</span></button>
+      <button id="tab-register" class="nsis-menu-item" type="button" role="tab" aria-controls="view-register" aria-selected="false" data-view="register"><i data-lucide="clipboard-check" aria-hidden="true"></i><span>课程注册</span></button>
+      <button id="tab-drop" class="nsis-menu-item" type="button" role="tab" aria-controls="view-drop" aria-selected="false" data-view="drop"><i data-lucide="arrow-right-left" aria-hidden="true"></i><span>加选 / 退选</span></button>
+      <button id="tab-progress" class="nsis-menu-item" type="button" role="tab" aria-controls="view-progress" aria-selected="false" data-view="progress"><i data-lucide="line-chart" aria-hidden="true"></i><span>学业进度</span></button>
+      <button id="tab-guide" class="nsis-menu-item" type="button" role="tab" aria-controls="view-guide" aria-selected="false" data-view="guide"><i data-lucide="book-open" aria-hidden="true"></i><span>选课小指南</span></button>
+    </nav>
+    <div class="nsis-help">
+      <div class="nsis-help-title">选课，需要一点帮助？</div>
+      <p class="nsis-help-text">了解每一步，安心做决定。</p>
+      <button class="nsis-btn nsis-btn-primary" type="button" data-view="guide">选课小指南</button>
+    </div>
+    <footer class="nsis-user">
+      <div class="nsis-avatar" aria-hidden="true">YL</div>
+      <div>
+        <strong>林语晴</strong>
+        <p class="nsis-sub">计算机科学 · 大三</p>
+      </div>
+    </footer>
+  </aside>
+
+  <main>
+    <header class="nsis-topbar">
+      <div>
+        <p class="nsis-eyebrow">2026 秋季学期</p>
+        <h1 id="nsis-view-title">首页概览</h1>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button class="nsis-icon-btn" type="button" aria-label="通知"><i data-lucide="bell" aria-hidden="true"></i></button>
+        <button class="nsis-icon-btn" type="button" aria-label="设置"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <section id="view-overview" role="tabpanel" aria-labelledby="tab-overview">
+      <div class="nsis-grid-3">
+        <div class="nsis-panel">
+          <p class="nsis-muted">计划学分</p>
+          <h2><span class="nsis-num">9</span> / 18</h2>
+          <p class="nsis-muted">3 门已规划</p>
+        </div>
+        <div class="nsis-panel">
+          <p class="nsis-muted">计划状态</p>
+          <h2>无时间冲突</h2>
+          <p class="nsis-muted">Plan A · Plan B 备选</p>
+        </div>
+        <div class="nsis-panel">
+          <p class="nsis-muted">备选计划</p>
+          <h2>2 个</h2>
+          <p class="nsis-muted">可随时调整</p>
+        </div>
+      </div>
+      <div class="nsis-grid-2">
+        <div class="nsis-panel">
+          <h2>重要更新</h2>
+          <ul class="nsis-list">
+            <li class="nsis-list-item"><span>CSC4130 授课教师更新</span><span class="nsis-pill nsis-pill-ok">20 分钟前</span></li>
+            <li class="nsis-list-item"><span>DDA2081 课程容量增加</span><span class="nsis-pill nsis-pill-ok">1 小时前</span></li>
+            <li class="nsis-list-item"><span>2026 秋季培养方案更新</span><span class="nsis-pill nsis-pill-warn">2 小时前</span></li>
+          </ul>
+        </div>
+        <div class="nsis-panel">
+          <h2>一周预览 Plan A</h2>
+          <div class="nsis-week">
+            <div class="nsis-week-col"><div class="nsis-week-item">ECO3121</div><div class="nsis-week-item">ENG2001A</div></div>
+            <div class="nsis-week-col"><div class="nsis-week-item">ECO3121</div><div class="nsis-week-item">ENG2001A</div></div>
+            <div class="nsis-week-col"><div class="nsis-week-item">GED2003</div></div>
+            <div class="nsis-week-col"><div class="nsis-week-item">STA2001</div></div>
+            <div class="nsis-week-col"><div class="nsis-week-item">无课</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-explore" role="tabpanel" aria-labelledby="tab-explore" hidden>
+      <div class="nsis-search">
+        <i data-lucide="search" aria-hidden="true"></i>
+        <input id="nsis-search-input" type="search" placeholder="按课程编号、标题或教师搜索" aria-label="搜索课程" />
+      </div>
+      <div class="nsis-course-grid" id="nsis-course-grid" aria-live="polite"></div>
+      <p class="nsis-status" aria-live="polite" id="nsis-search-status"></p>
+    </section>
+
+    <section id="view-plan" role="tabpanel" aria-labelledby="tab-plan" hidden>
+      <div class="nsis-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+          <h2>我的选课计划</h2>
+          <div style="display:flex; gap:6px;">
+            <button class="nsis-btn nsis-btn-primary" type="button" data-plan="A" aria-pressed="true">Plan A</button>
+            <button class="nsis-btn nsis-btn-ghost" type="button" data-plan="B" aria-pressed="false">Plan B</button>
+            <button class="nsis-btn nsis-btn-ghost" type="button" data-plan="C" aria-pressed="false">Plan C</button>
+          </div>
+        </div>
+        <p class="nsis-muted">已规划课程 <span class="nsis-plan-count">3</span> 门 · <span class="nsis-plan-status">无时间冲突</span></p>
+        <ul class="nsis-list nsis-plan-list" aria-live="polite"></ul>
+      </div>
+    </section>
+
+    <section id="view-register" role="tabpanel" aria-labelledby="tab-register" hidden>
+      <div class="nsis-panel">
+        <h2>课程注册流程</h2>
+        <div class="nsis-process">
+          <div class="nsis-process-step">构建计划</div>
+          <div class="nsis-process-step">检查计划</div>
+          <div class="nsis-process-step is-active">完成注册</div>
+          <div class="nsis-process-step">注册结果</div>
+        </div>
+      </div>
+      <div class="nsis-panel">
+        <h2>注册状态</h2>
+        <p class="nsis-status" aria-live="polite">已校验 Plan A，可提交注册</p>
+        <div class="nsis-actions">
+          <button class="nsis-btn nsis-btn-primary" type="button" id="nsis-register-submit">提交注册</button>
+          <button class="nsis-btn" type="button" id="nsis-register-check">重新校验</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-drop" role="tabpanel" aria-labelledby="tab-drop" hidden>
+      <div class="nsis-panel">
+        <h2>已注册课程</h2>
+        <ul class="nsis-list" id="nsis-registered-list"></ul>
+      </div>
+    </section>
+
+    <section id="view-progress" role="tabpanel" aria-labelledby="tab-progress" hidden>
+      <div class="nsis-panel">
+        <h2>学业进度</h2>
+        <div class="nsis-progress">
+          <div class="nsis-progress-row"><span>通识教育</span><div class="nsis-bar"><div class="nsis-bar-fill" style="width:67%"></div></div><span>8 / 12</span></div>
+          <div class="nsis-progress-row"><span>专业课程</span><div class="nsis-bar"><div class="nsis-bar-fill" style="width:61%"></div></div><span>22 / 36</span></div>
+          <div class="nsis-progress-row"><span>自由选修</span><div class="nsis-bar"><div class="nsis-bar-fill" style="width:50%"></div></div><span>9 / 18</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-guide" role="tabpanel" aria-labelledby="tab-guide" hidden>
+      <div class="nsis-panel">
+        <h2>选课小指南</h2>
+        <div style="display:grid; gap:12px;">
+          <div class="nsis-guide-step"><div class="nsis-guide-num">1</div><div><h3>探索课程</h3><p class="nsis-muted">按编号、教师或时间检索，先看约束和容量。</p></div></div>
+          <div class="nsis-guide-step"><div class="nsis-guide-num">2</div><div><h3>构建计划</h3><p class="nsis-muted">建立 Plan A / B / C，先确认时间与学分。</p></div></div>
+          <div class="nsis-guide-step"><div class="nsis-guide-num">3</div><div><h3>完成注册</h3><p class="nsis-muted">校验冲突、提交注册，失败后可换备选。</p></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+  (() => {
+    const root = document.getElementById('new-sis-mid-fi');
+    if (!root) return;
+    const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
+    const viewTitle = document.getElementById('nsis-view-title');
+    const courses = [
+      { id:'csc4130', code:'CSC4130', title:'Human-Computer Interaction', instructor:'Prof. Sidong Feng', credits:3, days:'Mon / Wed', time:'8:30-9:50', seats:50, seatsTotal:50 },
+      { id:'sta2001', code:'STA2001', title:'Statistics', instructor:'Prof. Li Ming', credits:3, days:'Tue / Thu', time:'14:00-15:30', seats:45, seatsTotal:50 },
+      { id:'mat3007', code:'MAT3007', title:'Optimization', instructor:'Prof. Xiao Ming', credits:3, days:'Mon / Wed', time:'13:30-14:50', seats:30, seatsTotal:40 },
+      { id:'eco3121', code:'ECO3121', title:'Behavioral Economics', instructor:'Prof. Chen', credits:3, days:'Mon / Wed', time:'10:00-11:20', seats:50, seatsTotal:60 },
+      { id:'ged2003', code:'GED2003', title:'Sustainability and Society', instructor:'Prof. Zhang', credits:3, days:'Wed', time:'19:00-21:30', seats:40, seatsTotal:50 }
+    ];
+    const planCourses = {
+      A: new Set(['eco3121','eng2001a','ged2003']),
+      B: new Set(['mat3007','sta2001']),
+      C: new Set([])
+    };
+    const registered = new Set(['eco3121','eng2001a','ged2003']);
+    const state = { view: 'overview', plan: 'A' };
+    const currentPlan = () => planCourses[state.plan];
+
+    const titles = {
+      overview:'首页概览', explore:'探索课程', plan:'我的选课计划',
+      register:'课程注册', drop:'加选 / 退选', progress:'学业进度', guide:'选课小指南'
+    };
+
+    function showView(view) {
+      state.view = view;
+      tabs.forEach(tab => tab.setAttribute('aria-selected', tab.dataset.view === view ? 'true' : 'false'));
+      root.querySelectorAll('section[role="tabpanel"]').forEach(section => {
+        section.hidden = section.id !== `view-${view}`;
+      });
+      viewTitle.textContent = titles[view];
+    }
+
+    function renderCourses() {
+      const grid = root.querySelector('#nsis-course-grid');
+      const query = (root.querySelector('#nsis-search-input')?.value || '').trim().toLowerCase();
+      grid.innerHTML = courses.filter(course => !query || `${course.code} ${course.title} ${course.instructor}`.toLowerCase().includes(query)).map(course => `
+        <article class="nsis-course-card">
+          <h3>${course.code} ${course.title}</h3>
+          <p class="nsis-muted">${course.instructor} · ${course.credits} 学分</p>
+          <div class="nsis-course-meta">
+            <span class="nsis-pill">${course.days}</span>
+            <span class="nsis-pill">${course.time}</span>
+            <span class="nsis-pill ${course.seats <= 0 ? 'nsis-pill-danger' : ''}">${course.seats} / ${course.seatsTotal} 席</span>
+          </div>
+          <div class="nsis-actions">
+            <button class="nsis-btn nsis-btn-primary" type="button" data-add="${course.id}" ${currentPlan().has(course.id) ? 'disabled' : ''}>
+              ${currentPlan().has(course.id) ? `已在 Plan ${state.plan}` : `加入 Plan ${state.plan}`}
+            </button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function renderPlan() {
+      const list = root.querySelector('.nsis-plan-list');
+      const visibleCourses = courses.filter(course => currentPlan().has(course.id));
+      list.innerHTML = visibleCourses.map(course => `
+        <li class="nsis-list-item">
+          <div>
+            <strong>${course.code} ${course.title}</strong>
+            <p class="nsis-muted">${course.instructor} · ${course.days} ${course.time}</p>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <span class="nsis-pill nsis-pill-ok">已加入</span>
+            <button class="nsis-btn nsis-btn-ghost" type="button" data-remove="${course.id}">移除</button>
+          </div>
+        </li>
+      `).join('');
+      root.querySelector('.nsis-plan-count').textContent = visibleCourses.length;
+    }
+
+    function renderRegistered() {
+      const list = root.querySelector('#nsis-registered-list');
+      list.innerHTML = courses.filter(course => registered.has(course.id)).map(course => `
+        <li class="nsis-list-item">
+          <div>
+            <strong>${course.code} ${course.title}</strong>
+            <p class="nsis-muted">${course.instructor} · ${course.credits} 学分</p>
+          </div>
+          <button class="nsis-btn nsis-btn-ghost" type="button" data-drop="${course.id}">退选</button>
+        </li>
+      `).join('');
+    }
+
+    function setStatus(text) {
+      const status = root.querySelector('#nsis-search-status');
+      if (status) status.textContent = text;
+    }
+
+    root.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => showView(button.dataset.view)));
+    root.querySelector('#nsis-search-input')?.addEventListener('input', () => {
+      renderCourses();
+      setStatus('');
+    });
+    root.addEventListener('click', event => {
+      const target = event.target.closest('[data-add],[data-remove],[data-drop]');
+      if (!target) return;
+      if (target.dataset.add) {
+        currentPlan().add(target.dataset.add);
+        registered.add(target.dataset.add);
+        renderCourses();
+        renderPlan();
+        renderRegistered();
+        setStatus(`已加入 Plan ${state.plan}`);
+      }
+      if (target.dataset.remove) {
+        currentPlan().delete(target.dataset.remove);
+        renderCourses();
+        renderPlan();
+        setStatus(`已从 Plan ${state.plan} 移除`);
+      }
+      if (target.dataset.drop) {
+        registered.delete(target.dataset.drop);
+        renderRegistered();
+        setStatus('已退选');
+      }
+    });
+    root.querySelectorAll('[data-plan]').forEach(button => button.addEventListener('click', () => {
+      state.plan = button.dataset.plan;
+      root.querySelectorAll('[data-plan]').forEach(item => item.setAttribute('aria-pressed', item.dataset.plan === state.plan ? 'true' : 'false'));
+      renderPlan();
+    }));
+    root.querySelector('#nsis-register-check')?.addEventListener('click', () => {
+      const status = root.querySelector('#nsis-register-status') || root.querySelector('#view-register .nsis-status');
+      if (status) status.textContent = '已重新校验，无冲突';
+    });
+    root.querySelector('#nsis-register-submit')?.addEventListener('click', () => {
+      const status = root.querySelector('#view-register .nsis-status');
+      if (status) status.textContent = '注册已提交，等待结果';
+    });
+
+    renderCourses();
+    renderPlan();
+    renderRegistered();
+    showView(state.view);
+    if (window.lucide) window.lucide.createIcons({ attrs: { width: 16, height: 16 } });
+  })();
+</script>
